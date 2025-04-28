@@ -1,0 +1,43 @@
+# Step 1: Install net-tools (if not already installed)
+# This is important because we got the error:
+# "/opt/lampp/share/xampp/xampplib: line 22: netstat: command not found"
+sudo apt install net-tools
+
+# Step 2: Stop any running Apache service 
+# When we tried this, we got: "Failed to stop apache2.service: Unit apache2.service not loaded"
+# This error is normal if Apache2 isn't installed - no action needed
+sudo service apache2 stop
+
+# Step 3: Stop XAMPP (for a clean start)
+sudo /opt/lampp/lampp stop
+
+# Step 4: Start XAMPP
+sudo /opt/lampp/lampp start
+
+# Step 5: Check if services are running properly
+sudo /opt/lampp/lampp status
+
+# Step 6: If you get "localhost refused to connect" error, try these:
+# a. Check if port 80 is being used:
+sudo lsof -i :80
+# or
+sudo netstat -tulpn | grep :80
+
+# b. Check XAMPP error logs:
+sudo tail -f /opt/lampp/logs/error_log
+
+# Step 7: Access your website through one of these URLs:
+# http://localhost/portfolioProject
+# or
+# http://127.0.0.1/portfolioProject
+# or
+# http://localhost:80/portfolioProject
+
+# If needed, restart XAMPP:
+sudo /opt/lampp/lampp restart
+
+# Common errors and solutions:
+# 1. "netstat: command not found" -> Install net-tools
+# 2. "Failed to stop apache2.service" -> Ignore if Apache2 isn't installed
+# 3. "localhost refused to connect" -> Check if XAMPP is running properly
+# 4. Database connection issues -> Check db.php configuration

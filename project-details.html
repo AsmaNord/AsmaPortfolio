@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" id="main-style">
+    <link rel="stylesheet" href="light-theme.css" id="light-style" disabled>
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Project Details - Asma ELMOKRETAR</title>
+    <link rel="icon" href="logoAsmaNoBg.png">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="index.html" class="back-btn"><span>←</span> Back</a>
+            <button id="theme-toggle" class="theme-toggle" style="margin-left: 1200px;">
+                <i class="fa fa-moon-o"></i>
+            </button>
+        </header>
+        
+        <div class="project-detail-content">
+            <!-- Content will be dynamically loaded -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get project ID from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('project');
+
+            // Project details data
+            const projectDetails = {
+                'riddle-game': {
+                    title: 'Riddle Game',
+                    description: `
+                        <div class="project-screenshots">
+                            <img src="riddleGame.png" alt="Riddle Game Screenshot">
+                        </div>
+                        <h2>About the Project</h2>
+                        <p>A vanilla JavaScript challenge to tease your brain and sharpen your code. <br><br>
+
+                        This is a fun, interactive riddle game built purely with vanilla JavaScript — no frameworks, no libraries. It features three difficulty levels — Easy, Medium, and Hard — each with a limited number of tries to guess the correct answer. The riddles touch on topics from general knowledge, tech, Arabic culture, and Islamic values.
+
+                        The goal behind this project was to challenge myself and practice core JavaScript skills while building something that’s not just engaging, but also meaningful.
+
+                        <br>
+                        <br>🧠 Think you can solve them all?</p>
+
+                        <h3>Technologies Used</h3>
+                        <ul>
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>JavaScript</li>
+                        </ul>
+
+                    `,
+                    demoLink: 'https://github.com/YourUsername/RiddleGame'
+                },
+                'eid-website': {
+                    title: 'Eid Website',
+                    description: `
+                        <div class="project-screenshots">
+                            <img src="eid1.png" alt="Eid Website Screenshot">
+                        </div>
+                        <h2>About the Project</h2>
+                        <p>A dynamic web application to enhance your Eid celebration experience with interactive features including a countdown timer, hadith generator, and custom greeting card maker.</p>
+                        
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li>Real-time Eid al-Fitr countdown timer with elegant animations</li>
+                            <li>Dual-language Hadith generator featuring Bukhari collection with text-to-speech for English</li>
+                            <li>Custom Eid card maker with multiple themes (Greetings, Apology, Invitation, Eidiyah)</li>
+                            <li>Card download functionality in PNG format</li>
+                        </ul>
+
+                        <h3>Technologies Used</h3>
+                        <ul>
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>JavaScript</li>
+                            <li>Random Hadith Generator API</li>
+                            <li>HTML2Canvas for image generation</li>
+                        </ul>
+
+                        <h3>Design Elements</h3>
+                        <ul>
+                            <li>Responsive layout</li>
+                            <li>Animated starry background</li>
+                            <li>Floating lantern effects</li>
+                            <li>Wave animations</li>
+                            <li>Islamic patterns and mosque imagery</li>
+                        </ul>
+                    `,
+                    demoLink: 'https://asmanord.github.io/eidWebsite/'
+                },
+                'product-management': {
+                    title: 'Product Management',
+                    description: `
+                        <div class="project-screenshots">
+                            <img src="productManagement.png" alt="Product Management Screenshot">
+                        </div>
+                        <h2>About the Project</h2>
+                        <p>The app is in java relys on CRUD principles (Create, Read, Update and Delete) using dynamic tables and exploiting the encapsulation priciple in OOP.</p>
+                        
+                        <h3>Features</h3>
+                        <ul>
+                            <li>Clear usage of abstaraction</li>
+                            <li>Demostrating encapsulation</li>
+                            <li>Usage of dynamic tables in java</li>
+                        </ul>
+
+                        <h3>Technologies Used</h3>
+                        <ul>
+                            <li>Java</li>
+                        </ul>
+                       
+                    `,
+                    demoLink: 'https://github.com/YourUsername/ProductManagement'
+                },
+                'typing-game': {
+                    title: 'Typing Game',
+                    description: `
+                        <div class="project-screenshots">
+                            <img src="typing-game.png" alt="Typing Game Screenshot">
+                        </div>
+                        <h2>About the Project</h2>
+                        <p>A web-based typing game that helps users practice their typing skills while learning web development concepts.</p>
+                        
+                        <h3>Features</h3>
+                        <ul>
+                            <li>Real-time feedback with word highlighting</li>
+                            <li>Error detection and visual feedback</li>
+                            <li>Timer to track typing speed</li>
+                            <li>Retro-style gaming interface</li>
+                        </ul>
+
+                        <h3>Technologies Used</h3>
+                        <ul>
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>JavaScript</li>
+                        </ul>
+
+                        <h3>Future Improvements</h3>
+                        <ul>
+                            <li>Add difficulty levels</li>
+                            <li>Implement word per minute (WPM) calculation</li>
+                            <li>Add sound effects</li>
+                        </ul>
+
+                    `,
+                    demoLink: 'https://asmanord.github.io/typingSpeedGame/'
+                }
+            };
+
+            // Load project content
+            const projectContent = document.querySelector('.project-detail-content');
+            const project = projectDetails[projectId];
+            
+            if (project) {
+                projectContent.innerHTML = `
+                    <h1>${project.title}</h1>
+                    <div class="project-content">
+                        ${project.description}
+                    </div>
+                    <div class="project-actions">
+                        <a href="${project.demoLink}" class="demo-link" target="_blank">
+                            View Demo <span class="fa fa-external-link"></span>
+                        </a>
+                    </div>
+                `;
+            } else {
+                projectContent.innerHTML = '<h1>Project Not Found</h1>';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -6,6 +6,9 @@ A dynamic and interactive portfolio website showcasing my journey as a Computer 
 
 This portfolio serves as both a personal showcase and a practical application of web development concepts learned during my CS studies. It features responsive design, interactive elements, and clean code architecture.
 
+## Demo 
+https://asmanord.github.io/AsmaPortfolio/
+
 ## Key Features 🌟
 
 - **Dynamic Theme Switching**: Implemented dark/light mode with smooth transitions

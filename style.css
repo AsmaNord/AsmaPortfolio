@@ -332,7 +332,7 @@ body {
 .title {
     display: grid;
     grid-template-columns: 1fr;
-    font-size: 50px;
+    font-size: 30px;
     margin-top: 20px;
     margin-bottom: 10px;
     text-shadow: 0 0 50px #9c7ac9;

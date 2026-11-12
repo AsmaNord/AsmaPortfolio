@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create glowing dots
     const createGlowDots = () => {
         const container = document.body;
-        const numberOfDots = 8; // Increased number of dots for more effect
-        
+        const numberOfDots = window.innerWidth < 768 ? 4 : 8; // moins de points sur mobile
+
         // Updated color palette with vibrant purples and cyans
         const colors = [
             '#00ffff', // Cyan
@@ -19,19 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < numberOfDots; i++) {
             const dot = document.createElement('div');
             dot.className = 'glow-dot';
-            
+
             // Random position
             dot.style.left = `${Math.random() * 100}vw`;
             dot.style.top = `${Math.random() * 100}vh`;
-            
+
             // Larger size range for more impact
             const size = Math.random() * 200 + 100; // between 100px and 300px
             dot.style.width = `${size}px`;
             dot.style.height = `${size}px`;
-            
+
             // Random color from our new palette
             dot.style.background = colors[Math.floor(Math.random() * colors.length)];
-            
+
             container.appendChild(dot);
         }
     };
@@ -95,17 +95,9 @@ btns.forEach(btn => {
     btn.appendChild(ripple);
     setTimeout(() => ripple.remove(), 600);
 
-    // Show correct section + set active button
-    const text = btn.textContent.trim().toLowerCase();
-
-    if (text.includes('project')) {
-      showSection('projects');
-      setActiveButton(btn);
-    } else if (text.includes('certificate')) {
-      showSection('certificates');
-      setActiveButton(btn);
-    } else if (text.includes('tech') || text.includes('stack')) {
-      showSection('tech');
+    // Show correct section + set active button (data-section => independant de la langue)
+    if (btn.dataset.section) {
+      showSection(btn.dataset.section);
       setActiveButton(btn);
     }
   });
@@ -116,18 +108,13 @@ window.onload = function() {
   showSection('projects');
 
   const defaultBtn = Array.from(btns).find(btn =>
-    btn.textContent.trim().toLowerCase().includes('project')
+    btn.dataset.section === 'projects'
   );
   if (defaultBtn) setActiveButton(defaultBtn);
 };
 
-// Typing animation
-const texts = [
-    "Computer Science Student",
-    "C Programmer",
-    "Web Developer",
-    "SQL & Databases"
-];
+// Typing animation (traduisible)
+const getTexts = () => (window.I18N ? I18N.typing() : ['Computer Science Student', 'C Programmer', 'Web Developer', 'SQL & Databases']);
 
 let currentTextIndex = 0;
 let currentCharIndex = 0;
@@ -139,7 +126,8 @@ const deletingSpeed = 50; // Speed of deleting
 const pauseTime = 1000;   // Time to pause at full text
 
 function typeText() {
-    const currentText = texts[currentTextIndex];
+    const texts = getTexts();
+    const currentText = texts[currentTextIndex % texts.length];
     
     if (!isDeleting) {
         // Typing
@@ -168,12 +156,12 @@ function typeText() {
 document.getElementById('cv').addEventListener('click', function() {
     // Create link to underConstruction image
     const link = document.createElement('a');
-    link.href = 'underConstruction.jpeg';
-    link.download = 'underConstruction.jpeg';
+    link.href = 'Asma_Elmokretar_CV_IT_2026.pdf';
+    link.download = 'Asma_Elmokretar_CV_IT_2026.pdf';
     
     const button = this;
     const originalContent = button.innerHTML;
-    button.innerHTML = '<img src="document.png" alt="document-icon"> Downloading...';
+    button.innerHTML = '<img src="document.png" alt="document-icon"> ' + I18N.t('about.downloading');
     
     // Trigger download
     link.click();
@@ -299,3 +287,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Optional: Add this if you have dynamic content
     // someEventThatAddsContent.addEventListener('contentChanged', refreshAnimations);
 });
+
+// Menu hamburger (mobile / tablette)
+(function () {
+    const header = document.querySelector('.header');
+    const toggle = document.getElementById('menu-toggle');
+    if (!header || !toggle) return;
+    const setOpen = (open) => {
+        header.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.querySelector('i').className = open ? 'fa fa-times' : 'fa fa-bars';
+    };
+    toggle.addEventListener('click', () => setOpen(!header.classList.contains('menu-open')));
+    document.querySelectorAll('.navbar a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+    window.addEventListener('resize', () => { if (window.innerWidth > 1024) setOpen(false); });
+})();

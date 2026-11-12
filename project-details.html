@@ -1,109 +1,391 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="style.css" id="main-style">
     <link rel="stylesheet" href="light-theme.css" id="light-style" disabled>
+
     <script src="theme.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>Project Details - Asma ELMOKRETAR</title>
     <link rel="icon" href="logoAsmaNoBg.png">
+
+    <style>
+        /* Project screenshots carousel */
+
+        .project-carousel {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 30px auto 50px;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #151515;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .carousel-slide img {
+            display: block;
+            width: 100%;
+            height: 500px;
+            object-fit: contain;
+            background: #151515;
+        }
+
+        /* Previous and next buttons */
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(20, 20, 20, 0.75);
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            z-index: 2;
+            transition: 0.3s;
+        }
+
+        .carousel-btn:hover {
+            background: linear-gradient(90deg, #6465F1, #A556F7);
+        }
+
+        .carousel-prev {
+            left: 15px;
+        }
+
+        .carousel-next {
+            right: 15px;
+        }
+
+        /* Navigation dots */
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 0;
+        }
+
+        .carousel-dot {
+            width: 9px;
+            height: 9px;
+            border: none;
+            border-radius: 50%;
+            background: #777;
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 0;
+        }
+
+        .carousel-dot.active {
+            width: 25px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #6465F1, #A556F7);
+        }
+
+        /* Project descriptions */
+
+        .project-description {
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .project-description h2 {
+            margin-bottom: 20px;
+        }
+
+        .project-description h3 {
+            margin-top: 30px;
+            margin-bottom: 12px;
+        }
+
+        .project-description p {
+            margin-bottom: 18px;
+            line-height: 1.9;
+        }
+
+        .project-description ul {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .project-description li {
+            margin-bottom: 8px;
+        }
+
+        /* Header alignment */
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header .theme-toggle {
+            margin-left: auto !important;
+        }
+
+        /* Responsive design */
+
+        @media (max-width: 768px) {
+            .project-carousel {
+                margin: 20px auto 35px;
+            }
+
+            .carousel-slide img {
+                height: 300px;
+            }
+
+            .carousel-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 18px;
+            }
+
+            .project-description {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-slide img {
+                height: 220px;
+            }
+
+            .carousel-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
+
 <body>
+
     <div class="container">
+
         <header class="header">
-            <a href="index.html" class="back-btn"><span>←</span> Back</a>
-            <button id="theme-toggle" class="theme-toggle" style="margin-left: 1200px;">
+            <a href="index.html" class="back-btn">
+                <span>←</span> Back
+            </a>
+
+            <button id="theme-toggle" class="theme-toggle">
                 <i class="fa fa-moon-o"></i>
             </button>
         </header>
-        
+
         <div class="project-detail-content">
-            <!-- Content will be dynamically loaded -->
+            <!-- Project content will be dynamically loaded -->
         </div>
+
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get project ID from URL parameters
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Get project ID from URL
             const urlParams = new URLSearchParams(window.location.search);
             const projectId = urlParams.get('project');
 
-            // Project details data
+
+            // PROJECT DETAILS
             const projectDetails = {
+
+                // 1. HAVANA COFFEE
+
                 'riddle-game': {
-                    title: 'Riddle Game',
+
+                    title: 'Havana Coffee',
+
+                    screenshots: [
+                        'havanaMockup.png',
+                        'havanaPhone.png',
+                        'havanaDesktop.png'
+                        // Add more screenshots here:
+                        // 'havana-home.png',
+                        // 'havana-menu.png',
+                        // 'havana-gallery.png',
+                    ],
+
                     description: `
-                        <div class="project-screenshots">
-                            <img src="riddleGame.png" alt="Riddle Game Screenshot">
-                        </div>
+
                         <h2>About the Project</h2>
-                        <p>A vanilla JavaScript challenge to tease your brain and sharpen your code. <br><br>
 
-                        This is a fun, interactive riddle game built purely with vanilla JavaScript — no frameworks, no libraries. It features three difficulty levels — Easy, Medium, and Hard — each with a limited number of tries to guess the correct answer. The riddles touch on topics from general knowledge, tech, Arabic culture, and Islamic values.
+                        <p>
+                            Havana Coffee is a café website designed to showcase
+                            the brand's Cuban-inspired atmosphere through a warm,
+                            elegant, and immersive online experience.
+                        </p>
 
-                        The goal behind this project was to challenge myself and practice core JavaScript skills while building something that’s not just engaging, but also meaningful.
+                        <p>
+                            I developed the website using React, HTML, and CSS,
+                            focusing on responsive layouts, visual consistency,
+                            and an intuitive browsing experience.
+                        </p>
 
-                        <br>
-                        <br>🧠 Think you can solve them all?</p>
+                        <h3>Key Features</h3>
+
+                        <ul>
+                            <li>Welcoming and visually engaging homepage</li>
+                            <li>Interactive-style menu presentation</li>
+                            <li>Product showcases and photo gallery</li>
+                            <li>Contact information and business details</li>
+                            <li>Responsive desktop and mobile layouts</li>
+                        </ul>
+
+                        <h3>Design Approach</h3>
+
+                        <p>
+                            The design combines deep green backgrounds,
+                            warm golden accents, elegant typography, and
+                            rich imagery to reflect the café's distinctive
+                            Cuban-inspired identity.
+                        </p>
+
+                        <p>
+                            This project demonstrates my ability to create
+                            visually engaging websites tailored to a
+                            business's brand and needs.
+                        </p>
 
                         <h3>Technologies Used</h3>
+
                         <ul>
+                            <li>React</li>
                             <li>HTML5</li>
                             <li>CSS3</li>
-                            <li>JavaScript</li>
                         </ul>
 
                     `,
+
                     demoLink: 'https://github.com/YourUsername/RiddleGame'
                 },
+
+
+                // 2. BAKHTI DRIVING SCHOOL
+
                 'eid-website': {
-                    title: 'Eid Website',
+
+                    title: 'Bakhti Driving School',
+
+                    screenshots: [
+                        'bakhtiMockup.png',
+                        'bakhtiPhone.png',
+                        'bakhtiDesktop.png'
+                        // Add more screenshots here:
+                        // 'bakhti-home.png',
+                        // 'bakhti-services.png',
+                        // 'bakhti-contact.png',
+                    ],
+
                     description: `
-                        <div class="project-screenshots">
-                            <img src="eid1.png" alt="Eid Website Screenshot">
-                        </div>
+
                         <h2>About the Project</h2>
-                        <p>A dynamic web application to enhance your Eid celebration experience with interactive features including a countdown timer, hadith generator, and custom greeting card maker.</p>
-                        
+
+                        <p>
+                            Bakhti Driving School is a business website
+                            concept designed to present a driving school's
+                            services and help prospective learners explore
+                            their options.
+                        </p>
+
+                        <p>
+                            I developed the website using React, HTML, and CSS,
+                            focusing on responsive design, clear navigation,
+                            and an engaging user experience.
+                        </p>
+
                         <h3>Key Features</h3>
+
                         <ul>
-                            <li>Real-time Eid al-Fitr countdown timer with elegant animations</li>
-                            <li>Dual-language Hadith generator featuring Bukhari collection with text-to-speech for English</li>
-                            <li>Custom Eid card maker with multiple themes (Greetings, Apology, Invitation, Eidiyah)</li>
-                            <li>Card download functionality in PNG format</li>
+                            <li>Landing section introducing the driving school</li>
+                            <li>Visual guide to the three steps of obtaining a driving licence</li>
+                            <li>Driving lesson and service cards</li>
+                            <li>Student testimonials</li>
+                            <li>Special student offer section</li>
+                            <li>Visual location finder</li>
+                            <li>Contact information and clear calls to action</li>
                         </ul>
+
+                        <h3>Design Approach</h3>
+
+                        <p>
+                            The design combines a bold red-and-white color
+                            palette with structured content and clear calls
+                            to action, making the school's services easy to
+                            explore.
+                        </p>
+
+                        <p>
+                            The website is designed to provide a consistent
+                            browsing experience across desktop and mobile
+                            devices.
+                        </p>
 
                         <h3>Technologies Used</h3>
+
                         <ul>
+                            <li>React</li>
                             <li>HTML5</li>
                             <li>CSS3</li>
-                            <li>JavaScript</li>
-                            <li>Random Hadith Generator API</li>
-                            <li>HTML2Canvas for image generation</li>
                         </ul>
 
-                        <h3>Design Elements</h3>
-                        <ul>
-                            <li>Responsive layout</li>
-                            <li>Animated starry background</li>
-                            <li>Floating lantern effects</li>
-                            <li>Wave animations</li>
-                            <li>Islamic patterns and mosque imagery</li>
-                        </ul>
                     `,
+
                     demoLink: 'https://asmanord.github.io/eidWebsite/'
                 },
+
+
+                // 3. PRODUCT MANAGEMENT
+
                 'product-management': {
+
                     title: 'Product Management',
+
+                    screenshots: [
+                        'productManagement.png'
+
+                        // Add more screenshots here:
+                        // 'productManagement-2.png',
+                        // 'productManagement-3.png',
+                    ],
+
                     description: `
-                        <div class="project-screenshots">
-                            <img src="productManagement.png" alt="Product Management Screenshot">
-                        </div>
+
                         <h2>About the Project</h2>
                         <p>The app is in java relys on CRUD principles (Create, Read, Update and Delete) using dynamic tables and exploiting the encapsulation priciple in OOP.</p>
-                        
+
                         <h3>Features</h3>
                         <ul>
                             <li>Clear usage of abstaraction</li>
@@ -115,66 +397,274 @@
                         <ul>
                             <li>Java</li>
                         </ul>
-                       
+
                     `,
+
                     demoLink: 'https://github.com/YourUsername/ProductManagement'
                 },
+
+
+                // 4. REGLO
+
                 'typing-game': {
-                    title: 'Typing Game',
+
+                    title: 'REGLO | Custom Regulatory Monitoring Platform',
+
+                    screenshots: [
+                        'regloMockup.png',
+                        'reglo1.png',
+                        'reglo2.jpeg',
+                        'reglo3.png'
+
+                        // Add more screenshots here:
+                        // 'reglo-dashboard.png',
+                        // 'reglo-alerts.png',
+                        // 'reglo-mobile.png',
+                    ],
+
                     description: `
-                        <div class="project-screenshots">
-                            <img src="typing-game.png" alt="Typing Game Screenshot">
-                        </div>
+
                         <h2>About the Project</h2>
-                        <p>A web-based typing game that helps users practice their typing skills while learning web development concepts.</p>
-                        
-                        <h3>Features</h3>
+
+                        <p>
+                            REGLO is a B2B regulatory monitoring platform
+                            designed to help Algerian businesses track
+                            relevant legal requirements and manage their
+                            compliance activities.
+                        </p>
+
+                        <p>
+                            I contributed to the development of the platform
+                            using React, Django, Django REST Framework,
+                            and PostgreSQL.
+                        </p>
+
+                        <p>
+                            My work focused on database design, backend
+                            development, API integration, and frontend
+                            implementation. I also developed the mobile
+                            application using React Native, connected to
+                            the same backend as the web platform.
+                        </p>
+
+                        <h3>Key Features</h3>
+
                         <ul>
-                            <li>Real-time feedback with word highlighting</li>
-                            <li>Error detection and visual feedback</li>
-                            <li>Timer to track typing speed</li>
-                            <li>Retro-style gaming interface</li>
+                            <li>Regulatory monitoring</li>
+                            <li>Sector-based filtering</li>
+                            <li>Personalized regulatory alerts</li>
+                            <li>Compliance task management</li>
+                            <li>Dashboards for organizing regulatory obligations</li>
                         </ul>
 
                         <h3>Technologies Used</h3>
+
                         <ul>
-                            <li>HTML5</li>
-                            <li>CSS3</li>
-                            <li>JavaScript</li>
+                            <li>React</li>
+                            <li>Django</li>
+                            <li>Django REST Framework</li>
+                            <li>PostgreSQL</li>
+                            <li>React Native</li>
                         </ul>
 
-                        <h3>Future Improvements</h3>
-                        <ul>
-                            <li>Add difficulty levels</li>
-                            <li>Implement word per minute (WPM) calculation</li>
-                            <li>Add sound effects</li>
-                        </ul>
+                        <h3>My Contribution</h3>
+
+                        <p>
+                            This project demonstrates my ability to develop
+                            database-driven web applications, build backend
+                            APIs, and create mobile applications that work
+                            with a shared backend.
+                        </p>
 
                     `,
+
                     demoLink: 'https://asmanord.github.io/typingSpeedGame/'
                 }
+
             };
 
-            // Load project content
-            const projectContent = document.querySelector('.project-detail-content');
+
+            // LOAD PROJECT
+
+            const projectContent = document.querySelector(
+                '.project-detail-content'
+            );
+
             const project = projectDetails[projectId];
-            
+
+
             if (project) {
+
+                // Generate carousel slides
+
+                const slides = project.screenshots.map((image, index) => `
+                    <div class="carousel-slide">
+                        <img
+                            src="${image}"
+                            alt="${project.title} - Screenshot ${index + 1}"
+                            loading="${index === 0 ? 'eager' : 'lazy'}"
+                        >
+                    </div>
+                `).join('');
+
+
+                // Generate navigation dots
+
+                const dots = project.screenshots.map((_, index) => `
+                    <button
+                        class="carousel-dot ${index === 0 ? 'active' : ''}"
+                        data-index="${index}"
+                        aria-label="Go to screenshot ${index + 1}"
+                    ></button>
+                `).join('');
+
+
+                // Build page
+
                 projectContent.innerHTML = `
+
                     <h1>${project.title}</h1>
-                    <div class="project-content">
+
+                    <div class="project-carousel">
+
+                        <div class="carousel-container">
+
+                            <div class="carousel-track">
+                                ${slides}
+                            </div>
+
+                            <button
+                                class="carousel-btn carousel-prev"
+                                aria-label="Previous screenshot"
+                            >
+                                &#10094;
+                            </button>
+
+                            <button
+                                class="carousel-btn carousel-next"
+                                aria-label="Next screenshot"
+                            >
+                                &#10095;
+                            </button>
+
+                        </div>
+
+                        <div class="carousel-dots">
+                            ${dots}
+                        </div>
+
+                    </div>
+
+
+                    <div class="project-content project-description">
+
                         ${project.description}
+
                     </div>
+
+
                     <div class="project-actions">
-                        <a href="${project.demoLink}" class="demo-link" target="_blank">
-                            View Demo <span class="fa fa-external-link"></span>
-                        </a>
+
+                       
+
                     </div>
+
                 `;
+
+
+                // CAROUSEL FUNCTIONALITY
+
+                const track = projectContent.querySelector('.carousel-track');
+
+                const prevBtn = projectContent.querySelector('.carousel-prev');
+
+                const nextBtn = projectContent.querySelector('.carousel-next');
+
+                const dotsElements = projectContent.querySelectorAll('.carousel-dot');
+
+                const totalSlides = project.screenshots.length;
+
+                let currentIndex = 0;
+
+
+                // Hide controls when there is only one screenshot
+
+                if (totalSlides <= 1) {
+
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+
+                    projectContent.querySelector('.carousel-dots').style.display = 'none';
+
+                }
+
+
+                // Update carousel
+
+                function updateCarousel() {
+
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                    dotsElements.forEach((dot, index) => {
+
+                        dot.classList.toggle(
+                            'active',
+                            index === currentIndex
+                        );
+
+                    });
+
+                }
+
+
+                // Previous image
+
+                prevBtn.addEventListener('click', function () {
+
+                    currentIndex = (
+                        currentIndex - 1 + totalSlides
+                    ) % totalSlides;
+
+                    updateCarousel();
+
+                });
+
+
+                // Next image
+
+                nextBtn.addEventListener('click', function () {
+
+                    currentIndex = (
+                        currentIndex + 1
+                    ) % totalSlides;
+
+                    updateCarousel();
+
+                });
+
+
+                // Navigate using dots
+
+                dotsElements.forEach(dot => {
+
+                    dot.addEventListener('click', function () {
+
+                        currentIndex = Number(this.dataset.index);
+
+                        updateCarousel();
+
+                    });
+
+                });
+
             } else {
+
                 projectContent.innerHTML = '<h1>Project Not Found</h1>';
+
             }
+
         });
     </script>
+
 </body>
 </html>
